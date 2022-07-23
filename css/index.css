@@ -1,0 +1,113 @@
+* {
+    margin-top: 0px;
+    margin-left: 0px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    cursor: default;
+    z-index: 2;
+}
+
+body {
+    background-color: #666;
+    width: 100vw;
+    height: 99vh;
+}
+
+input {
+    cursor: auto;
+}
+
+.form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    background-color: #bbb;
+    width: 100%;
+    min-width: 280px;
+    max-width: 400px;
+    height: 100%;
+    min-height: 450px;
+    max-height: 550px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    justify-content: center;    
+    border: 2px solid black;
+    border-radius: 10px;
+    position: relative;
+}
+
+.container:hover {
+    border: 3px solid black;
+}
+
+.imagem-cidade {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    visibility: hidden;
+    opacity: 0.2;
+    z-index: 1;
+}
+
+.titulo {
+    font-size: 3rem;
+    font-weight: 400;
+}
+
+.input_cidade {
+    width: 80%;
+    padding: 10px;
+    border: 2px solid black;
+    outline: 0px;
+    border-radius: 10px;
+}
+
+.input_cidade:hover {
+    border: inset 2px solid black;
+}
+
+.clima {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cidade {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-top: 30px;
+    margin-bottom: 0px;     
+}
+
+.div_temp {
+    display: flex;
+}
+
+.temperatura {
+    font-size: 9rem;
+    font-weight: 400;
+    margin: 0px 0px 0px 0px;   
+}
+
+.graus {
+    font-size: 2rem;
+    font-weight: 400;
+    margin-top: 40px;
+}
+
+.icone_clima {
+    visibility: hidden;
+    width: 20%;
+    margin: -10px;
+}
+
+.descricao {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
