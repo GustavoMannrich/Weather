@@ -1,13 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 * {
     margin-top: 0px;
     margin-left: 0px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Roboto';
     cursor: default;
-    z-index: 2;
+    z-index: 2;    
 }
 
 body {
-    background-color: #666;
+    background-color: #eee;
     width: 100vw;
     height: 99vh;
 }
@@ -25,7 +27,7 @@ input {
 }
 
 .container {
-    background-color: #bbb;
+    background-color: #fff;
     width: 100%;
     min-width: 280px;
     max-width: 400px;
@@ -35,40 +37,49 @@ input {
     display: flex;
     flex-direction: column;
     align-items: center;    
-    justify-content: center;    
-    border: 2px solid black;
-    border-radius: 10px;
+    justify-content: center;        
     position: relative;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    overflow: hidden;
 }
 
 .container:hover {
-    border: 3px solid black;
+    border: 1px solid black;
 }
 
 .imagem-cidade {
-    width: 100%;
+    width: auto;
     height: 100%;
     position: absolute;
     visibility: hidden;
-    opacity: 0.2;
+    opacity: 0.5;
     z-index: 1;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    image-rendering: optimizeSpeed;
 }
 
 .titulo {
     font-size: 3rem;
-    font-weight: 400;
+    font-weight: bolder;
+    color: white;
+    text-shadow: 0 0 4px rgba(0, 0, 0, 1), 0 0 20px rgba(0, 0, 0, 0.19);
 }
 
 .input_cidade {
-    width: 80%;
-    padding: 10px;
-    border: 2px solid black;
-    outline: 0px;
-    border-radius: 10px;
+    width: 80%;    
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border: 0px solid black;
+    outline: 0;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2), 0 5px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .input_cidade:hover {
-    border: inset 2px solid black;
+    border: 1px solid black;
+    padding-top: 7px;
+    padding-bottom: 7px;
 }
 
 .clima {
@@ -76,13 +87,19 @@ input {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    visibility: hidden;
+    width: 100%;
 }
 
 .cidade {
-    font-size: 2rem;
-    font-weight: 500;
+    font-size: clamp(1rem, 2rem, 3rem);    
+    font-weight: bolder;
     margin-top: 30px;
-    margin-bottom: 0px;     
+    margin-bottom: 0px;   
+    max-width: 80%;
+    text-align: center;
+    color: white;
+    text-shadow: 0 0 4px rgba(0, 0, 0, 1), 0 0 20px rgba(0, 0, 0, 0.19);
 }
 
 .div_temp {
@@ -90,24 +107,76 @@ input {
 }
 
 .temperatura {
-    font-size: 9rem;
-    font-weight: 400;
-    margin: 0px 0px 0px 0px;   
+    font-size: 9rem;    
+    font-weight: lighter;
+    margin: 0px 0px 0px 0px;  
+    color: white;
+    text-shadow: 0 0 4px rgba(0, 0, 0, 1), 0 0 20px rgba(0, 0, 0, 0.19);
 }
 
 .graus {
     font-size: 2rem;
-    font-weight: 400;
+    font-weight: bold;
     margin-top: 40px;
+    color: white;
+    text-shadow: 0 0 4px rgba(0, 0, 0, 1), 0 0 20px rgba(0, 0, 0, 0.19);
+}
+
+.div_descricao {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    background-color: white;
+    width: 80%;    
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .icone_clima {
-    visibility: hidden;
-    width: 20%;
-    margin: -10px;
+    width: 50px;
+    margin-bottom: -15px;
 }
 
 .descricao {
     font-size: 1.2rem;
     font-weight: 500;
+    margin: 5px;    
+}
+
+.loader {
+    border: 5px solid rgba(255, 255, 255, 0);
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;    
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spinAnimation 1s linear infinite;
+    margin-top: 50px; 
+    position: absolute;   
+    visibility: hidden;
+  }
+
+.fadeIn {
+    animation: fadeInAnimation 0.5s;
+}
+  
+@keyframes spinAnimation {
+    0% { 
+        transform: rotate(0deg); 
+    }
+
+    100% { 
+        transform: rotate(360deg); 
+    }
+}
+
+@keyframes fadeInAnimation {
+    0% { 
+        transform: scale(0.5); 
+    }
+
+    100% { 
+        transform: scale(1); 
+    }
 }

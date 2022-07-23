@@ -11,23 +11,25 @@
     <title>Weather</title>
 </head>
 <body>
-    <form class="form">
-        <div class="container">     
-            <img src="" alt="Imagem da cidade" class="imagem-cidade">       
+    <form class="form">        
+        <div class="container">                 
+            <img class="imagem-cidade" src="">
             <h1 class="titulo">Weather</h1>
 
-            <input type="text" class="input_cidade" placeholder="City">
-
-            <div class="clima">
-                <h1 class="cidade"></h1>
+            <input type="text" class="input_cidade" placeholder="City">            
+            <div class="loader"></div>
+            <div class="clima">                                
+                <h1 class="cidade"></h1>                
 
                 <div class="div_temp">
                     <h1 class="temperatura">0</h1>
                     <h2 class="graus">ºC</h2>
                 </div>
                 
-                <img class="icone_clima" src="" alt="Ícone do clima">
-                <p class="descricao"></p>
+                <div class="div_descricao">
+                    <img class="icone_clima" src="" alt="Ícone do clima">
+                    <p class="descricao"></p>
+                </div>
             </div>
         </div>
     </form>

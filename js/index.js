@@ -6,6 +6,49 @@ const descricao = document.querySelector('.descricao');
 const icone_clima = document.querySelector('.icone_clima');
 const container = document.querySelector('.container');
 const imagem_cidade = document.querySelector('.imagem-cidade');
+const clima = document.querySelector('.clima');
+const loader = document.querySelector('.loader');
+const div_descricao = document.querySelector('.div_descricao');
+
+const startLoading = () => {
+    clima.style.visibility = 'hidden';
+    div_descricao.style.visibility = 'hidden';
+    loader.style.visibility = 'visible';
+}
+
+const stopLoading = () => {
+    loader.style.visibility = 'hidden';
+    clima.style.visibility = 'visible';   
+    
+    clima.classList.add('fadeIn');
+
+    setTimeout(() => {
+        clima.classList.remove('fadeIn');
+    }, 500);
+}
+
+const showWeather = (hasImage) => {    
+    imagem_cidade.style.visibility = hasImage? 'visible' : 'hidden';    
+    div_descricao.style.visibility = 'visible';
+    stopLoading();
+}
+
+const updateWeatherData = (data) => {
+    if (data) {
+        cidade.innerHTML = data.name.trim();
+        temperatura.innerHTML = data.main.temp.toString().substring(0, 4);
+        descricao.innerHTML = data.weather[0].description;
+        icone_clima.src = getIconURL(data.weather[0].icon);
+    }
+    else {
+        cidade.innerHTML = 'City not found';
+        temperatura.innerHTML = '0';
+        descricao.innerHTML = '';
+        div_descricao.style.visibility = 'hidden';
+        imagem_cidade.style.visibility = 'hidden'; 
+        stopLoading();
+    }    
+}
 
 const fetchCityImage = (city) => {
     const options = {
@@ -16,21 +59,20 @@ const fetchCityImage = (city) => {
         }
     };
     
-    fetch(`https://bing-image-search1.p.rapidapi.com/images/search?q=${city}&count=1`, options)
+    fetch(`https://bing-image-search1.p.rapidapi.com/images/search?q=${encodeURI(city + ' tourism')}&count=1`, options)
     .then((response) => {
         return response.json()
     })
-    .then((response) => {
-        console.log(container.style['background-color'])
-
-        container.style['background-color'] = '';        
-
+    .then((response) => { 
         imagem_cidade.src = response.value[0].contentUrl;
-        imagem_cidade.style.visibility = 'visible';
+
+        setTimeout(() => {            
+            showWeather(true);      
+        }, 500);        
     })
     .catch((err) => {
         console.error(err)
-        imagem_cidade.style.visibility = 'hidden';
+        showWeather(false);      
     });
 }
 
@@ -41,6 +83,8 @@ const getIconURL = (code) => {
 const fetchWeatherData = (event) => {
     event.preventDefault();
 
+    startLoading();
+
     const options = {
         method: 'GET',
         headers: {
@@ -49,34 +93,26 @@ const fetchWeatherData = (event) => {
         }
     };
 
-    fetch(`https://community-open-weather-map.p.rapidapi.com/weather?q=${input_cidade.value}&units=metric`, options)
+    fetch(`https://community-open-weather-map.p.rapidapi.com/weather?q=${encodeURI(input_cidade.value)}&units=metric`, options)
     .then((response) => {
         return response.json()
     })
     .then((response) => {
-        console.log(response)
-
         if (response.cod === 200) {
-            cidade.innerHTML = response.name
-            temperatura.innerHTML = response.main.temp.toString().substring(0, 4);
-            descricao.innerHTML = response.weather[0].description;
-            icone_clima.style.visibility = 'visible';
-            icone_clima.src = getIconURL(response.weather[0].icon);
-
+            updateWeatherData(response);
             fetchCityImage(response.name);
         }
         else {
-            cidade.innerHTML = 'City not found'
-            temperatura.innerHTML = '0';
-            descricao.innerHTML = '';
-            icone_clima.style.visibility = 'hidden';
+            updateWeatherData(null);            
         }  
     })
     .catch((err) => {
-        console.error(err)
+        console.error(err);
+        updateWeatherData(null); 
     });
 
     input_cidade.value = '';
 }
 
 form.addEventListener('submit', fetchWeatherData);
+input_cidade.focus();
